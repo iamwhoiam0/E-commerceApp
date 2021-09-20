@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/navigation_main">
+    <fragment
+        android:id="@+id/navigation_main"
+        android:name="com.example.ecommerceconcept.presentation.view.fragments.MainFragment"
+        android:label="MainFragment"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_navigation_main_to_productDetails"
+            app:destination="@id/productDetails" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_basket"
+        android:name="com.example.ecommerceconcept.presentation.view.fragments.BasketFragment"
+        android:label="BasketFragment"
+        tools:layout="@layout/fragment_basket"/>
+
+    <fragment
+        android:id="@+id/navigation_favorite"
+        android:name="com.example.ecommerceconcept.presentation.view.fragments.FavoritesFragment"
+        android:label="FavoritesFragment"
+        tools:layout="@layout/fragment_favorites"/>
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.example.ecommerceconcept.presentation.view.fragments.ProfileFragment"
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_profile"/>
+    <activity
+        android:id="@+id/productDetails"
+        android:name="com.example.ecommerceconcept.presentation.view.activities.ProductDetails"
+        android:label="activity_product_details"
+        tools:layout="@layout/activity_product_details"/>
+
+</navigation>

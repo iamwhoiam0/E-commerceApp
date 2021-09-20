@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".presentation.view.activities.ProductDetails">
+
+    <ImageButton
+        android:id="@+id/back_btn"
+        android:layout_width="37dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="42dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/btn_back"
+        android:src="@drawable/ic_back"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+    <TextView
+        android:id="@+id/productDetails_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/product_details"
+        android:layout_marginTop="43dp"
+        android:fontFamily="@font/markpro"
+        android:textSize="18sp"
+        android:textColor="@color/blue"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageButton
+        android:id="@+id/basket_btn"
+        android:layout_width="37dp"
+        android:layout_height="37dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/round_10"
+        android:backgroundTint="@color/orange"
+        android:src="@drawable/ic_menu_basket"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager2_pd"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:paddingHorizontal="85dp"
+        android:layout_marginTop="37dp"
+        android:overScrollMode="never"
+        app:layout_constraintTop_toBottomOf="@+id/productDetails_tv"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cardProductDetails"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/card"
+        android:layout_marginTop="14dp"
+        android:paddingVertical="28dp"
+        android:paddingHorizontal="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/view_pager2_pd"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:textColor="@color/blue"
+            android:text="Galaxy Note 20 Ultra"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <ImageButton
+            android:id="@+id/is_favorite"
+            android:layout_width="37dp"
+            android:layout_height="33dp"
+            android:background="@drawable/btn_back"
+            android:src="@drawable/heart_white_selector"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <RatingBar
+            android:id="@+id/ratingBar_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            style="@style/MyRatingBar"
+            android:isIndicator="true"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/product_name"/>
+
+        <RadioGroup
+            android:id="@+id/info_rg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ratingBar_indicator">
+
+
+            <RadioButton
+                android:id="@+id/shop_rb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@drawable/radio_flat_selector"
+                android:button="@android:color/transparent"
+                android:checked="true"
+                android:text="Shop"
+                android:textSize="20sp"
+                android:textColor="@color/radio_flat_text_selector" />
+            <RadioButton
+                android:id="@+id/details_rb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@drawable/radio_flat_selector"
+                android:button="@android:color/transparent"
+                android:text="Details"
+                android:textSize="20sp"
+                android:textColor="@color/radio_flat_text_selector" />
+            <RadioButton
+                android:id="@+id/features_rb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@drawable/radio_flat_selector"
+                android:button="@android:color/transparent"
+                android:text="Features"
+                android:textSize="20sp"
+                android:textColor="@color/radio_flat_text_selector" />
+
+        </RadioGroup>
+
+        <fragment
+            android:id="@+id/nav_host_fragment_2"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="32dp"
+            app:defaultNavHost="true"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/info_rg"
+            app:layout_constraintBottom_toTopOf="@+id/buy_ll"/>
+
+        <LinearLayout
+            android:id="@+id/buy_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="27dp"
+            android:orientation="horizontal"
+            android:background="@drawable/round_10"
+            android:backgroundTint="@color/orange"
+            android:paddingVertical="15dp"
+            android:paddingHorizontal="40dp"
+            app:layout_constraintTop_toBottomOf="@id/nav_host_fragment_2"
+            app:layout_constraintBottom_toBottomOf="parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:text="@string/add_to_cart"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:textSize="20sp"
+                android:fontFamily="@font/markpro"/>
+
+            <TextView
+                android:id="@+id/price_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="@string/price"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:textSize="20sp"
+                android:fontFamily="@font/markpro"/>
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
