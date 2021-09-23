@@ -4,12 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import com.example.ecommerceconcept.R
 import com.example.ecommerceconcept.databinding.ActivityMainBinding
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class MainActivity : AppCompatActivity() {
@@ -31,13 +27,25 @@ class MainActivity : AppCompatActivity() {
 
         mNavController = findNavController(R.id.nav_host_fragment)
 
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_main, R.id.navigation_basket, R.id.navigation_favorite, R.id.navigation_profile
-            )
-        )
-        setupActionBarWithNavController(mNavController, appBarConfiguration)
-        mBinding?.navView?.setupWithNavController(mNavController)
+//        val appBarConfiguration = AppBarConfiguration(
+//            setOf(
+//                R.id.main_nav, R.id.basket_nav, R.id.favorites_nav, R.id.profile_nav
+//            )
+//        )
+//        setupActionBarWithNavController(mNavController, appBarConfiguration)
+
+        mBinding?.mainNav?.setOnClickListener {
+            mNavController.navigate(R.id.navigation_main)
+        }
+        mBinding?.basketNav?.setOnClickListener {
+            mNavController.navigate(R.id.navigation_basket)
+        }
+        mBinding?.favoritesNav?.setOnClickListener {
+            mNavController.navigate(R.id.navigation_favorite)
+        }
+        mBinding?.profileNav?.setOnClickListener {
+            mNavController.navigate(R.id.navigation_profile)
+        }
     }
 
     override fun onDestroy() {

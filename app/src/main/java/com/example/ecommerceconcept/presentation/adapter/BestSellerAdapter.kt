@@ -57,7 +57,7 @@ class BestSellerAdapter(private var bestSeller: List<BestSeller>): RecyclerView.
         }
 
         holder.itemCardView.setOnClickListener(
-            Navigation.createNavigateOnClickListener(R.id.action_navigation_main_to_productDetails)
+            Navigation.createNavigateOnClickListener(R.id.action_navigation_main_to_productDetailsFragment)
         )
     }
 

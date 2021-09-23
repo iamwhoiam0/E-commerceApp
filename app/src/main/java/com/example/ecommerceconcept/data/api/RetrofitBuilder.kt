@@ -1,6 +1,6 @@
 package com.example.ecommerceconcept.data.api
 
-import com.example.ecommerceconcept.data.entities.Constants
+import com.example.ecommerceconcept.utils.Constants
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

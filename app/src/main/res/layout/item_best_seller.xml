@@ -37,6 +37,7 @@
             android:text="1500$"
             android:textColor="@color/gray"
             android:textSize="12sp"
+            android:layout_marginStart="7dp"
             app:layout_constraintLeft_toRightOf="@+id/current_price_tv"
             app:layout_constraintBottom_toBottomOf="@+id/current_price_tv"/>
 

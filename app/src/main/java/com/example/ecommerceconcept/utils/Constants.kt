@@ -1,4 +1,4 @@
-package com.example.ecommerceconcept.data.entities
+package com.example.ecommerceconcept.utils
 
 object Constants {
 

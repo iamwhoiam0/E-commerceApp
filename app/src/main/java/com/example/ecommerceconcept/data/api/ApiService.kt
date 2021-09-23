@@ -1,6 +1,6 @@
 package com.example.ecommerceconcept.data.api
 
-import com.example.ecommerceconcept.data.entities.Constants
+import com.example.ecommerceconcept.utils.Constants
 import com.example.ecommerceconcept.data.entities.MyCartDataItem
 import com.example.ecommerceconcept.data.entities.ProductDetailsDataItem
 import com.example.ecommerceconcept.data.entities.TestEntitiesItem

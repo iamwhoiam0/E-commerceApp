@@ -1,27 +1,25 @@
 package com.example.ecommerceconcept.presentation.view.fragments
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioButton
+import android.widget.RadioGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.navArgs
+import com.example.ecommerceconcept.R
 import com.example.ecommerceconcept.data.entities.ProductDetailsDataItem
 import com.example.ecommerceconcept.databinding.FragmentShopBinding
 
 
-class ShopFragment : Fragment() {
+class ShopFragment(private val productDetailsDataItem: ProductDetailsDataItem) : Fragment() {
 
     private var mBinding: FragmentShopBinding? = null
-    //private val args by navArgs<ShopFragmentArgs>()
 
-    var shopInfo: ProductDetailsDataItem? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Log.i("Life", "onCreate")
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,70 +29,45 @@ class ShopFragment : Fragment() {
         // Inflate the layout for this fragment
         mBinding = FragmentShopBinding.inflate(inflater,container,false)
 
+        mBinding?.let {
+            it.cpuTv.text = productDetailsDataItem.CPU
+            it.cameraTv.text = parseCamera(productDetailsDataItem.camera)
+            it.ssdTv.text = productDetailsDataItem.ssd
+            it.sdTv.text = productDetailsDataItem.sd
+            setupColors(productDetailsDataItem.color)
+        }
+
         return mBinding!!.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        Log.i("Life", "onViewCreated")
-    }
 
-    override fun onStart() {
-        super.onStart()
-        Log.i("Life", "onStart")
-    }
+    private fun setupColors(color: List<String>) {
+        val lp: RadioGroup.LayoutParams  = RadioGroup.LayoutParams( RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT)
+        lp.setMargins(15,15,15,15)
 
-    override fun onResume() {
-        super.onResume()
-
-        //val args = requireActivity().intent?.extras?.let { ShopFragmentArgs.fromBundle(it) }
-        val bundle = requireActivity().intent.getParcelableExtra<ProductDetailsDataItem>("current_item")
-        mBinding?.let {
-            it.cpuTv.text = bundle?.CPU
-            it.cameraTv.text = parseCamera(bundle?.camera)
-            it.ssdTv.text = bundle?.ssd
-            it.sdTv.text = bundle?.sd
-        }
-//        args?.let {
-//            mBinding?.let {
-//                it.cpuTv.text = args.currentItem.CPU
-//                it.cameraTv.text = parseCamera(args.currentItem.camera)
-//                it.ssdTv.text = args.currentItem.ssd
-//                it.sdTv.text = args.currentItem.sd
+        for (i in color.indices){
+            val rb = RadioButton(requireActivity())
+            //Log.i("check color: ${color[i]}", rb.toString())
+            //rb.buttonDrawable = ContextCompat.getDrawable(requireActivity(), android.R.color.transparent)
+            rb.buttonDrawable = ContextCompat.getDrawable(requireActivity(), R.drawable.test_switch_check)
+            rb.buttonTintList = ContextCompat.getColorStateList(requireActivity(), R.color.white)
+            rb.background = ContextCompat.getDrawable(requireActivity(), R.drawable.round_30)
+            rb.backgroundTintList = ColorStateList.valueOf(Color.parseColor(color[i]))
+            //rb.backgroundTintList = ContextCompat.getColorStateList(requireActivity(), R.color.orange)
+            //rb.foreground = ContextCompat.getDrawable(requireActivity(), R.drawable.color_selector)
+            rb.layoutParams = lp
+//            if (i == 0){
+//                rb.isChecked = true
 //            }
-//        }
-        Log.i("Life", "onResume")
-    }
 
-    override fun onPause() {
-        super.onPause()
-        Log.i("Life", "onPause")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.i("Life", "onStop")
+            mBinding?.colorRadioGroup?.addView(rb, i)
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         mBinding = null
         Log.i("Life", "onDestroyView")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.i("Life", "onDestroy")
-    }
-
-
-    override fun onDetach() {
-        super.onDetach()
-        Log.i("Life", "onDetach")
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
     }
 
     private fun parseCamera(camera: String?): String? {

@@ -6,8 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.ecommerceconcept.R
+import com.example.ecommerceconcept.data.entities.ProductDetailsDataItem
 
-class DetailsFragment : Fragment() {
+class DetailsFragment(val productDetailsDataItem: ProductDetailsDataItem) : Fragment() {
 
 
     override fun onCreateView(

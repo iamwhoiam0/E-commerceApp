@@ -94,21 +94,20 @@
 
             <HorizontalScrollView
                 android:id="@+id/btn_scrollview"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:scrollbars="none"
                 android:overScrollMode="never"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/selectCategory_txt">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:paddingHorizontal="27dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_gravity="start">
 
                     <ImageButton
                         android:id="@+id/phones_ib"
@@ -223,7 +222,7 @@
 
             <EditText
                 android:id="@+id/search_et"
-                android:layout_width="300dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:imeOptions="actionSearch"
                 android:inputType="text"
@@ -239,6 +238,7 @@
                 android:paddingVertical="9dp"
                 android:paddingHorizontal="24dp"
                 app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/scan_ib"
                 app:layout_constraintTop_toBottomOf="@+id/btn_scrollview"/>
 
             <ImageButton
@@ -250,7 +250,7 @@
                 android:layout_marginTop="35dp"
                 android:layout_marginStart="11dp"
                 android:layout_marginEnd="37dp"
-                app:layout_constraintLeft_toRightOf="@+id/search_et"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/btn_scrollview"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -347,5 +347,119 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/filter_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_30_top"
+        android:backgroundTint="@color/white"
+        android:paddingTop="24dp"
+        android:paddingStart="44dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="44dp"
+        android:duration="300"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <ImageButton
+            android:id="@+id/exit_ib"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/round_10"
+            android:backgroundTint="@color/blue"
+            android:src="@drawable/ic_exit"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/filter_options"
+            android:textSize="18sp"
+            android:textColor="@color/blue"
+            android:fontFamily="@font/markpro"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/done_btn"
+            app:layout_constraintBottom_toBottomOf="@+id/done_btn"/>
+
+        <Button
+            android:id="@+id/done_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_10"
+            app:backgroundTint="@color/orange"
+            android:text="Done"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/markpro"
+            android:textAllCaps="false"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/exit_ib">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Brand"
+                android:textSize="18sp"
+                android:textColor="@color/blue"
+                android:fontFamily="@font/markpro"
+                android:layout_marginVertical="10dp"/>
+            <Spinner
+                android:id="@+id/spinner_brand"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingVertical="7dp"
+                android:background="@drawable/background_spinner"
+                android:entries="@array/brands"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Price"
+                android:textSize="18sp"
+                android:textColor="@color/blue"
+                android:fontFamily="@font/markpro"
+                android:layout_marginVertical="10dp"/>
+            <Spinner
+                android:id="@+id/spinner_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingVertical="7dp"
+                android:background="@drawable/background_spinner"
+                android:entries="@array/price"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Size"
+                android:textSize="18sp"
+                android:textColor="@color/blue"
+                android:fontFamily="@font/markpro"
+                android:layout_marginVertical="10dp"/>
+            <Spinner
+                android:id="@+id/spinner_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingVertical="7dp"
+                android:background="@drawable/background_spinner"
+                android:entries="@array/size"/>
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

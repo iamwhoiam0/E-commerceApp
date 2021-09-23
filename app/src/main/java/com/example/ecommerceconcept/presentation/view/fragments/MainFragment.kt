@@ -4,12 +4,15 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.ArrayAdapter
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.viewpager2.widget.ViewPager2
+import com.example.ecommerceconcept.R
 import com.example.ecommerceconcept.data.api.ApiHelper
 import com.example.ecommerceconcept.data.api.RetrofitBuilder
 import com.example.ecommerceconcept.data.entities.BestSeller
@@ -22,6 +25,7 @@ import com.example.ecommerceconcept.presentation.adapter.ViewPagerAdapter
 import com.example.ecommerceconcept.presentation.viewModel.MainViewModel
 import com.example.ecommerceconcept.presentation.viewModel.MainViewModelFactory
 import com.example.ecommerceconcept.utils.Status
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class MainFragment : Fragment() {
@@ -33,6 +37,7 @@ class MainFragment : Fragment() {
     private lateinit var homeStore: List<HomeStore>
     private lateinit var bestSeller: List<BestSeller>
 
+    private lateinit var navBar: LinearLayout
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,6 +58,48 @@ class MainFragment : Fragment() {
         }
         setupViewModel()
         setupObservers()
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        navBar = requireActivity().findViewById(R.id.custom_menu)
+
+        mBinding?.filterIv?.setOnClickListener {
+            Toast.makeText(requireActivity(), "Фильтр", Toast.LENGTH_SHORT).show()
+            if(navBar.visibility == View.VISIBLE){
+                showFilter()
+                //setupSpinners()
+            }else{
+                hideFilter()
+            }
+        }
+
+        mBinding?.exitIb?.setOnClickListener {
+            hideFilter()
+        }
+    }
+
+    private fun showFilter(){
+        navBar.visibility = View.GONE
+        mBinding?.filterView?.visibility = View.VISIBLE
+    }
+
+    private fun hideFilter(){
+        navBar.visibility = View.VISIBLE
+        mBinding?.filterView?.visibility = View.GONE
+    }
+
+    private fun setupSpinners() {
+        val adapterBrand = ArrayAdapter.createFromResource(
+            requireActivity(),
+            R.array.brands,
+            android.R.layout.simple_spinner_item
+        )
+
+        adapterBrand.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        mBinding?.spinnerBrand?.adapter = adapterBrand
     }
 
 
@@ -98,4 +145,9 @@ class MainFragment : Fragment() {
         ).get(MainViewModel::class.java)
     }
 
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        mBinding = null
+    }
 }

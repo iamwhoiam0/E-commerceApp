@@ -71,7 +71,7 @@
             android:layout_weight="10"
             android:paddingStart="23dp"
             android:paddingEnd="32dp"
-            android:paddingTop="80dp"
+            android:paddingTop="50dp"
             android:overScrollMode="never"/>
 
         <View

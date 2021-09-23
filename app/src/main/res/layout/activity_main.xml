@@ -8,19 +8,69 @@
 
 
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/nav_view"
+<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--        android:id="@+id/nav_view"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@drawable/round_30"-->
+<!--        app:backgroundTint="@color/blue"-->
+<!--        app:itemIconTint="@color/white"-->
+<!--        app:labelVisibilityMode="unlabeled"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/nav_host_fragment"-->
+<!--        app:menu="@menu/bottom_nav_menu" />-->
+
+    <LinearLayout
+        android:id="@+id/custom_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/round_30"
-        app:backgroundTint="@color/blue"
-        app:itemIconTint="@color/white"
-        app:labelVisibilityMode="unlabeled"
+        android:backgroundTint="@color/blue"
+        android:paddingVertical="25dp"
+        android:paddingHorizontal="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nav_host_fragment"
-        app:menu="@menu/bottom_nav_menu" />
+        app:layout_constraintRight_toRightOf="parent">
+
+        <ImageButton
+            android:id="@+id/main_nav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:background="@null"
+            android:layout_gravity="bottom"
+            android:src="@drawable/ic_menu_main"/>
+
+        <ImageButton
+            android:id="@+id/basket_nav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:layout_gravity="bottom"
+            android:src="@drawable/ic_menu_basket"/>
+
+        <ImageButton
+            android:id="@+id/favorites_nav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:layout_gravity="bottom"
+            android:src="@drawable/ic_menu_favorites"/>
+
+        <ImageButton
+            android:id="@+id/profile_nav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:layout_gravity="bottom"
+            android:src="@drawable/ic_menu_profile"/>
+
+    </LinearLayout>
 
     <fragment
         android:id="@+id/nav_host_fragment"
@@ -28,7 +78,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:defaultNavHost="true"
-        app:layout_constraintBottom_toTopOf="@id/nav_view"
+        app:layout_constraintBottom_toTopOf="@id/custom_menu"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"

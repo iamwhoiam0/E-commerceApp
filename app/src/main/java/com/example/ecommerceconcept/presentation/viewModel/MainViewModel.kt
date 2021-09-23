@@ -27,6 +27,17 @@ class MainViewModel(private val mainRepository: MainRepository): ViewModel() {
             emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
         }
     }
+
+    fun getProductDetails() = liveData(Dispatchers.IO) {
+        emit(Resource.loading(data = null))
+        try {
+            emit(Resource.success(data = mainRepository.getProductDetails()))
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+        }
+    }
+
+
 }
 
 class MainViewModelFactory(private val apiHelper: ApiHelper) : ViewModelProvider.Factory {
