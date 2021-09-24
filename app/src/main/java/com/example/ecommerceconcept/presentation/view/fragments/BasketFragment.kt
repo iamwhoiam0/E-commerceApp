@@ -17,6 +17,7 @@ import com.example.ecommerceconcept.data.entities.MyCartDataItem
 import com.example.ecommerceconcept.databinding.FragmentBasketBinding
 import com.example.ecommerceconcept.presentation.adapter.MyCartAdapter
 import com.example.ecommerceconcept.presentation.viewModel.CartViewModel
+import com.example.ecommerceconcept.presentation.viewModel.MainViewModel
 import com.example.ecommerceconcept.utils.Status
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -25,7 +26,7 @@ class BasketFragment : Fragment() {
 
     private var mBinding: FragmentBasketBinding? = null
 
-    private val cartViewModel : CartViewModel by viewModel()
+    private val mainViewModel : MainViewModel by viewModel()
 
     private lateinit var navBar: LinearLayout
 
@@ -55,7 +56,7 @@ class BasketFragment : Fragment() {
 
 
     private fun setupObservers() {
-        cartViewModel.cartItem.observe(viewLifecycleOwner, Observer {
+        mainViewModel.cartItem.observe(viewLifecycleOwner, Observer {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {

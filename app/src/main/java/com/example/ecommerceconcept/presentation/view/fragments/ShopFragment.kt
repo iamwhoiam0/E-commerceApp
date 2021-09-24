@@ -55,7 +55,7 @@ class ShopFragment(private val productDetailsDataItem: ProductDetailsDataItem) :
             rb.textSize = 13F
             rb.buttonDrawable = ContextCompat.getDrawable(requireActivity(), android.R.color.transparent)
             rb.setTextColor(resources.getColor(R.color.capacity_gray))
-            rb.setPadding(getPx(15))
+            rb.setPadding(getPx(10))
             rb.background = ContextCompat.getDrawable(requireActivity(), R.drawable.radio_flat_selector)
             mBinding?.capacityRg?.addView(rb, i)
 

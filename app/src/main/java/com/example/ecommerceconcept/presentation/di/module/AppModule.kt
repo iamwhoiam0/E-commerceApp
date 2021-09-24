@@ -13,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 val appModule = module{
     single { provideRetrofit(Constants.BASE_URL) }
-    factory { provideApiService(get()) }
+    single { provideApiService(get()) }
     single { provideNetworkHelper(androidContext()) }
 
     single<ApiHelper> {

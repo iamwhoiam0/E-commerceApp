@@ -60,8 +60,8 @@
 
             <ImageView
                 android:id="@+id/filter_iv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:src="@drawable/ic_filter"
                 android:layout_marginEnd="35dp"
                 app:layout_constraintRight_toRightOf="parent"
@@ -92,133 +92,17 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/header_block"/>
 
-            <HorizontalScrollView
+
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/btn_scrollview"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
                 android:layout_marginTop="24dp"
-                android:scrollbars="none"
+                android:orientation="horizontal"
                 android:overScrollMode="never"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintTop_toBottomOf="@+id/selectCategory_txt">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:paddingHorizontal="27dp"
-                    android:orientation="vertical"
-                    android:layout_gravity="start">
-
-                    <ImageButton
-                        android:id="@+id/phones_ib"
-                        android:layout_width="75dp"
-                        android:layout_height="75dp"
-                        android:background="@drawable/shape_selector"
-                        android:src="@drawable/ic_phone"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/phones"
-                        android:textSize="12sp"
-                        android:textColor="@color/blue"
-                        android:fontFamily="@font/markpro"
-                        android:layout_marginTop="7dp"
-                        app:layout_constraintTop_toBottomOf="@id/phones_ib"
-                        app:layout_constraintLeft_toLeftOf="@id/phones_ib"
-                        app:layout_constraintRight_toRightOf="@id/phones_ib"/>
-
-                    <ImageButton
-                        android:id="@+id/computer_ib"
-                        android:layout_width="75dp"
-                        android:layout_height="75dp"
-                        android:layout_marginStart="23dp"
-                        android:background="@drawable/shape_selector"
-                        android:src="@drawable/ic_computer"
-                        app:layout_constraintLeft_toRightOf="@+id/phones_ib"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/computer"
-                        android:textSize="12sp"
-                        android:textColor="@color/blue"
-                        android:fontFamily="@font/markpro"
-                        android:layout_marginTop="7dp"
-                        app:layout_constraintTop_toBottomOf="@id/computer_ib"
-                        app:layout_constraintLeft_toLeftOf="@id/computer_ib"
-                        app:layout_constraintRight_toRightOf="@id/computer_ib"/>
-
-                    <ImageButton
-                        android:id="@+id/health_ib"
-                        android:layout_width="75dp"
-                        android:layout_height="75dp"
-                        android:layout_marginStart="23dp"
-                        android:background="@drawable/shape_selector"
-                        android:src="@drawable/ic_health"
-                        app:layout_constraintLeft_toRightOf="@+id/computer_ib"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/health"
-                        android:textSize="12sp"
-                        android:textColor="@color/blue"
-                        android:fontFamily="@font/markpro"
-                        android:layout_marginTop="7dp"
-                        app:layout_constraintTop_toBottomOf="@id/health_ib"
-                        app:layout_constraintLeft_toLeftOf="@id/health_ib"
-                        app:layout_constraintRight_toRightOf="@id/health_ib"/>
-
-                    <ImageButton
-                        android:id="@+id/books_ib"
-                        android:layout_width="75dp"
-                        android:layout_height="75dp"
-                        android:layout_marginStart="23dp"
-                        android:background="@drawable/shape_selector"
-                        android:src="@drawable/ic_books"
-                        app:layout_constraintLeft_toRightOf="@+id/health_ib"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/books"
-                        android:textSize="12sp"
-                        android:textColor="@color/blue"
-                        android:fontFamily="@font/markpro"
-                        android:layout_marginTop="7dp"
-                        app:layout_constraintTop_toBottomOf="@id/books_ib"
-                        app:layout_constraintLeft_toLeftOf="@id/books_ib"
-                        app:layout_constraintRight_toRightOf="@id/books_ib"/>
-
-                    <ImageButton
-                        android:id="@+id/f5"
-                        android:layout_width="75dp"
-                        android:layout_height="75dp"
-                        android:layout_marginStart="23dp"
-                        android:background="@drawable/shape_selector"
-                        android:src="@drawable/ic_books"
-                        app:layout_constraintLeft_toRightOf="@+id/books_ib"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/other"
-                        android:textSize="12sp"
-                        android:textColor="@color/blue"
-                        android:fontFamily="@font/markpro"
-                        android:layout_marginTop="7dp"
-                        app:layout_constraintTop_toBottomOf="@id/f5"
-                        app:layout_constraintLeft_toLeftOf="@id/f5"
-                        app:layout_constraintRight_toRightOf="@id/f5"/>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </HorizontalScrollView>
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/selectCategory_txt"/>
 
             <EditText
                 android:id="@+id/search_et"

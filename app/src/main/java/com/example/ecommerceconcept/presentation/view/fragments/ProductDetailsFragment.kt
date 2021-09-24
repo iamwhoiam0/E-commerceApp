@@ -18,6 +18,7 @@ import com.example.ecommerceconcept.data.entities.ProductDetailsDataItem
 import com.example.ecommerceconcept.databinding.FragmentProductDetailsBinding
 import com.example.ecommerceconcept.presentation.adapter.FragmentPagerAdapter
 import com.example.ecommerceconcept.presentation.adapter.ViewPagerProductAdapter
+import com.example.ecommerceconcept.presentation.viewModel.MainViewModel
 import com.example.ecommerceconcept.presentation.viewModel.ProductViewModel
 import com.example.ecommerceconcept.utils.Status
 import com.google.android.material.tabs.TabLayout
@@ -31,7 +32,7 @@ class ProductDetailsFragment : Fragment() {
     private lateinit var fragmentPagerAdapter: FragmentPagerAdapter
     private lateinit var navBar: LinearLayout
 
-    private val productViewModel : ProductViewModel by viewModel()
+    private val mainViewModel : MainViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -120,7 +121,7 @@ class ProductDetailsFragment : Fragment() {
 
 
     private fun setupObservers() {
-        productViewModel.productDetails.observe(viewLifecycleOwner, Observer {
+        mainViewModel.productDetails.observe(viewLifecycleOwner, Observer {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
