@@ -1,11 +1,16 @@
 package com.example.ecommerceconcept.data.api
 
-class ApiHelper (private val apiService: ApiService){
+import com.example.ecommerceconcept.data.entities.MyCartDataItem
+import com.example.ecommerceconcept.data.entities.ProductDetailsDataItem
+import com.example.ecommerceconcept.data.entities.TestEntitiesItem
+import retrofit2.Response
 
-    suspend fun getMain() = apiService.getMain()
+interface  ApiHelper{
 
-    suspend fun getCart() = apiService.getCart()
+    suspend fun getMain(): Response<ArrayList<TestEntitiesItem>>
 
-    suspend fun getProductDetails() = apiService.getProductDetails()
+    suspend fun getCart(): Response<ArrayList<MyCartDataItem>>
+
+    suspend fun getProductDetails(): Response<ArrayList<ProductDetailsDataItem>>
 
 }

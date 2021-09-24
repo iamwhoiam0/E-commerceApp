@@ -4,17 +4,13 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.ArrayAdapter
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.ecommerceconcept.R
-import com.example.ecommerceconcept.data.api.ApiHelper
-import com.example.ecommerceconcept.data.api.RetrofitBuilder
 import com.example.ecommerceconcept.data.entities.BestSeller
 import com.example.ecommerceconcept.data.entities.HomeStore
 import com.example.ecommerceconcept.data.entities.TestEntitiesItem
@@ -23,16 +19,15 @@ import com.example.ecommerceconcept.presentation.adapter.BestSellerAdapter
 import com.example.ecommerceconcept.presentation.adapter.GridSpacingItemDecoration
 import com.example.ecommerceconcept.presentation.adapter.ViewPagerAdapter
 import com.example.ecommerceconcept.presentation.viewModel.MainViewModel
-import com.example.ecommerceconcept.presentation.viewModel.MainViewModelFactory
 import com.example.ecommerceconcept.utils.Status
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class MainFragment : Fragment() {
 
     private var mBinding: FragmentMainBinding? = null
 
-    private lateinit var viewModel: MainViewModel
+    private val mainViewModel : MainViewModel by viewModel()
 
     private lateinit var homeStore: List<HomeStore>
     private lateinit var bestSeller: List<BestSeller>
@@ -56,9 +51,8 @@ class MainFragment : Fragment() {
             it.phonesIb.isSelected = true
             it.phonesIb.setColorFilter(Color.WHITE)  // активная кнопка категории
         }
-        setupViewModel()
-        setupObservers()
 
+        setupObservers()
     }
 
     override fun onResume() {
@@ -70,7 +64,6 @@ class MainFragment : Fragment() {
             Toast.makeText(requireActivity(), "Фильтр", Toast.LENGTH_SHORT).show()
             if(navBar.visibility == View.VISIBLE){
                 showFilter()
-                //setupSpinners()
             }else{
                 hideFilter()
             }
@@ -91,35 +84,21 @@ class MainFragment : Fragment() {
         mBinding?.filterView?.visibility = View.GONE
     }
 
-    private fun setupSpinners() {
-        val adapterBrand = ArrayAdapter.createFromResource(
-            requireActivity(),
-            R.array.brands,
-            android.R.layout.simple_spinner_item
-        )
-
-        adapterBrand.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        mBinding?.spinnerBrand?.adapter = adapterBrand
-    }
-
-
     private fun setupObservers() {
-        viewModel.getMain().observe(viewLifecycleOwner, Observer {
-            it?.let { resource ->
-                when (resource.status) {
-                    Status.SUCCESS -> {
-                        Log.i("Success", resource.data.toString())
-                        resource.data?.let { main ->
-                            retrieveList(main)
-                        }
-                        Toast.makeText(requireActivity(), "Загрузка завершена", Toast.LENGTH_SHORT).show()
+        mainViewModel.mainItem.observe(viewLifecycleOwner, Observer {
+            when (it.status) {
+                Status.SUCCESS -> {
+                    Log.i("Success", it.data.toString())
+                    it.data?.let { main ->
+                        retrieveList(main)
                     }
-                    Status.ERROR -> {
-                        Toast.makeText(requireActivity(), it.message, Toast.LENGTH_LONG).show()
-                    }
-                    Status.LOADING -> {
-                        Toast.makeText(requireActivity(), "Загрузка данных", Toast.LENGTH_SHORT).show()
-                    }
+                    Toast.makeText(requireActivity(), "Загрузка завершена", Toast.LENGTH_SHORT).show()
+                }
+                Status.LOADING -> {
+                    Toast.makeText(requireActivity(), "Загрузка данных", Toast.LENGTH_SHORT).show()
+                }
+                Status.ERROR -> {
+                    Toast.makeText(requireActivity(), it.message, Toast.LENGTH_LONG).show()
                 }
             }
         })
@@ -136,13 +115,6 @@ class MainFragment : Fragment() {
             it.bestSellerRv.layoutManager = GridLayoutManager(requireActivity(),2)
             it.bestSellerRv.addItemDecoration(GridSpacingItemDecoration(2, 14, true))
         }
-    }
-
-    private fun setupViewModel() {
-        viewModel = ViewModelProvider(
-            this,
-            MainViewModelFactory(ApiHelper(RetrofitBuilder.apiService))
-        ).get(MainViewModel::class.java)
     }
 
 

@@ -10,6 +10,8 @@ import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.core.content.ContextCompat
+import androidx.core.view.children
+import androidx.core.view.setPadding
 import androidx.fragment.app.Fragment
 import com.example.ecommerceconcept.R
 import com.example.ecommerceconcept.data.entities.ProductDetailsDataItem
@@ -35,9 +37,41 @@ class ShopFragment(private val productDetailsDataItem: ProductDetailsDataItem) :
             it.ssdTv.text = productDetailsDataItem.ssd
             it.sdTv.text = productDetailsDataItem.sd
             setupColors(productDetailsDataItem.color)
+            setupCapacity(productDetailsDataItem.capacity)
         }
 
         return mBinding!!.root
+    }
+    fun getPx(dp: Int): Int {
+        val scale = resources.displayMetrics.density
+        return (dp * scale + 0.5f).toInt()
+    }
+
+    private fun setupCapacity(capacity: List<String>) {
+
+        for (i in capacity.indices){
+            val rb = RadioButton(requireActivity())
+            rb.text = capacity[i]
+            rb.textSize = 13F
+            rb.buttonDrawable = ContextCompat.getDrawable(requireActivity(), android.R.color.transparent)
+            rb.setTextColor(resources.getColor(R.color.capacity_gray))
+            rb.setPadding(getPx(15))
+            rb.background = ContextCompat.getDrawable(requireActivity(), R.drawable.radio_flat_selector)
+            mBinding?.capacityRg?.addView(rb, i)
+
+            if (i == 0){
+                rb.isChecked = true
+                rb.setTextColor(Color.WHITE)
+            }
+
+            rb.setOnCheckedChangeListener { buttonView, isChecked ->
+                if (isChecked){
+                    buttonView.setTextColor(Color.WHITE)
+                }else{
+                    buttonView.setTextColor(resources.getColor(R.color.capacity_gray))
+                }
+            }
+        }
     }
 
 
@@ -49,7 +83,7 @@ class ShopFragment(private val productDetailsDataItem: ProductDetailsDataItem) :
             val rb = RadioButton(requireActivity())
             //Log.i("check color: ${color[i]}", rb.toString())
             //rb.buttonDrawable = ContextCompat.getDrawable(requireActivity(), android.R.color.transparent)
-            rb.buttonDrawable = ContextCompat.getDrawable(requireActivity(), R.drawable.test_switch_check)
+            //rb.buttonDrawable = ContextCompat.getDrawable(requireActivity(), R.drawable.test_switch_check)
             rb.buttonTintList = ContextCompat.getColorStateList(requireActivity(), R.color.white)
             rb.background = ContextCompat.getDrawable(requireActivity(), R.drawable.round_30)
             rb.backgroundTintList = ColorStateList.valueOf(Color.parseColor(color[i]))
@@ -60,7 +94,7 @@ class ShopFragment(private val productDetailsDataItem: ProductDetailsDataItem) :
 //                rb.isChecked = true
 //            }
 
-            mBinding?.colorRadioGroup?.addView(rb, i)
+            mBinding?.colorRg?.addView(rb, i)
         }
     }
 

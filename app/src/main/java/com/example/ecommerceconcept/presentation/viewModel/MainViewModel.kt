@@ -1,52 +1,44 @@
 package com.example.ecommerceconcept.presentation.viewModel
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.liveData
-import com.example.ecommerceconcept.data.api.ApiHelper
+import android.util.Log
+import android.widget.Toast
+import androidx.lifecycle.*
+import com.example.ecommerceconcept.data.entities.MyCartDataItem
+import com.example.ecommerceconcept.data.entities.TestEntitiesItem
 import com.example.ecommerceconcept.data.repository.MainRepository
+import com.example.ecommerceconcept.utils.NetworkHelper
 import com.example.ecommerceconcept.utils.Resource
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class MainViewModel(private val mainRepository: MainRepository): ViewModel() {
+class MainViewModel(
+    private val mainRepository: MainRepository,
+    private val networkHelper: NetworkHelper
+) : ViewModel() {
 
-    fun getMain() = liveData(Dispatchers.IO) {
-        emit(Resource.loading(data = null))
-        try {
-            emit(Resource.success(data = mainRepository.getMain()))
-        } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
-        }
+
+    private val _mainItem = MutableLiveData<Resource<ArrayList<TestEntitiesItem>>>()
+    val mainItem: LiveData<Resource<ArrayList<TestEntitiesItem>>>
+        get() = _mainItem
+
+
+    init {
+        getMain()
     }
 
-    fun getCart() = liveData(Dispatchers.IO) {
-        emit(Resource.loading(data = null))
-        try {
-            emit(Resource.success(data = mainRepository.getCart()))
-        } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+    private fun getMain(){
+        viewModelScope.launch {
+            _mainItem.postValue(Resource.loading(null))
+            if (networkHelper.isNetworkConnected()){
+                mainRepository.getMain().let {
+                    if (it.isSuccessful){
+                        _mainItem.postValue(Resource.success(it.body()))
+                    } else{
+                        _mainItem.postValue(Resource.error(it.errorBody().toString(), null))
+                    }
+                }
+            }else {
+                _mainItem.postValue(Resource.error("No internet connection", null))
+            }
         }
     }
-
-    fun getProductDetails() = liveData(Dispatchers.IO) {
-        emit(Resource.loading(data = null))
-        try {
-            emit(Resource.success(data = mainRepository.getProductDetails()))
-        } catch (exception: Exception) {
-            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
-        }
-    }
-
-
-}
-
-class MainViewModelFactory(private val apiHelper: ApiHelper) : ViewModelProvider.Factory {
-
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
-            return MainViewModel(MainRepository(apiHelper)) as T
-        }
-        throw IllegalArgumentException("Unknown class name")
-    }
-
 }

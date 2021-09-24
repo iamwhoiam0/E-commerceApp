@@ -109,7 +109,7 @@
         app:layout_constraintLeft_toLeftOf="parent"/>
 
     <RadioGroup
-        android:id="@+id/color_radio_group"
+        android:id="@+id/color_rg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -125,6 +125,17 @@
 <!--            android:buttonTint="@color/white"-->
 <!--            android:backgroundTint="@color/orange"-->
 <!--            android:checked="true"/>-->
+
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/capacity_rg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/select_tv">
 
     </RadioGroup>
 

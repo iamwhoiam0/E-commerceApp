@@ -18,4 +18,6 @@
     <color name="starInActive">#FFDA7A</color>
     <color name="textUnselected">#818181</color>
     <color name="textCardInfo">#B7B7B7</color>
+    
+    <color name="capacity_gray">#8D8D8D</color>
 </resources>

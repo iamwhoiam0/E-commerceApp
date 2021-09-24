@@ -10,7 +10,7 @@ import com.example.ecommerceconcept.presentation.view.fragments.DetailsFragment
 import com.example.ecommerceconcept.presentation.view.fragments.FeaturesFragment
 import com.example.ecommerceconcept.presentation.view.fragments.ShopFragment
 
-class FragmentPagerAdapter(var productDetailsDataItem: ProductDetailsDataItem, var fragmentManager: FragmentManager, var lifecycle: Lifecycle) : FragmentStateAdapter(fragmentManager, lifecycle) {
+class FragmentPagerAdapter(var productDetailsDataItem: ProductDetailsDataItem, private var fragmentManager: FragmentManager, var lifecycle: Lifecycle) : FragmentStateAdapter(fragmentManager, lifecycle) {
 
     override fun getItemCount(): Int = 3
 

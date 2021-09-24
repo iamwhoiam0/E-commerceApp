@@ -10,22 +10,19 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.ecommerceconcept.R
-import com.example.ecommerceconcept.data.api.ApiHelper
-import com.example.ecommerceconcept.data.api.RetrofitBuilder
 import com.example.ecommerceconcept.data.entities.ProductDetailsDataItem
 import com.example.ecommerceconcept.databinding.FragmentProductDetailsBinding
 import com.example.ecommerceconcept.presentation.adapter.FragmentPagerAdapter
 import com.example.ecommerceconcept.presentation.adapter.ViewPagerProductAdapter
-import com.example.ecommerceconcept.presentation.viewModel.MainViewModel
-import com.example.ecommerceconcept.presentation.viewModel.MainViewModelFactory
+import com.example.ecommerceconcept.presentation.viewModel.ProductViewModel
 import com.example.ecommerceconcept.utils.Status
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class ProductDetailsFragment : Fragment() {
@@ -34,7 +31,7 @@ class ProductDetailsFragment : Fragment() {
     private lateinit var fragmentPagerAdapter: FragmentPagerAdapter
     private lateinit var navBar: LinearLayout
 
-    private lateinit var viewModel: MainViewModel
+    private val productViewModel : ProductViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,9 +46,7 @@ class ProductDetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupViewModel()
         setupObservers()
-
 
         mBinding?.backBtn?.setOnClickListener {
             findNavController().popBackStack()
@@ -125,7 +120,7 @@ class ProductDetailsFragment : Fragment() {
 
 
     private fun setupObservers() {
-        viewModel.getProductDetails().observe(viewLifecycleOwner, Observer {
+        productViewModel.productDetails.observe(viewLifecycleOwner, Observer {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
@@ -157,13 +152,6 @@ class ProductDetailsFragment : Fragment() {
             it.viewPager2Pd.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER // Костыль для скрытия эффекта свечения ViewPage2
         }
 
-    }
-
-    private fun setupViewModel() {
-        viewModel = ViewModelProvider(
-            this,
-            MainViewModelFactory(ApiHelper(RetrofitBuilder.apiService))
-        ).get(MainViewModel::class.java)
     }
 
     override fun onDestroyView() {

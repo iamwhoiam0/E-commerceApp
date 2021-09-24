@@ -8,29 +8,24 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ecommerceconcept.R
-import com.example.ecommerceconcept.data.api.ApiHelper
-import com.example.ecommerceconcept.data.api.RetrofitBuilder
 import com.example.ecommerceconcept.data.entities.Basket
 import com.example.ecommerceconcept.data.entities.MyCartDataItem
 import com.example.ecommerceconcept.databinding.FragmentBasketBinding
 import com.example.ecommerceconcept.presentation.adapter.MyCartAdapter
-import com.example.ecommerceconcept.presentation.viewModel.MainViewModel
-import com.example.ecommerceconcept.presentation.viewModel.MainViewModelFactory
+import com.example.ecommerceconcept.presentation.viewModel.CartViewModel
 import com.example.ecommerceconcept.utils.Status
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class BasketFragment : Fragment() {
 
     private var mBinding: FragmentBasketBinding? = null
 
-    private lateinit var viewModel: MainViewModel
+    private val cartViewModel : CartViewModel by viewModel()
 
     private lateinit var navBar: LinearLayout
 
@@ -55,19 +50,12 @@ class BasketFragment : Fragment() {
             findNavController().popBackStack()
         }
 
-        setupViewModel()
         setupObservers()
     }
 
-    private fun setupViewModel() {
-        viewModel = ViewModelProvider(
-            this,
-            MainViewModelFactory(ApiHelper(RetrofitBuilder.apiService))
-        ).get(MainViewModel::class.java)
-    }
 
     private fun setupObservers() {
-        viewModel.getCart().observe(viewLifecycleOwner, Observer {
+        cartViewModel.cartItem.observe(viewLifecycleOwner, Observer {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
