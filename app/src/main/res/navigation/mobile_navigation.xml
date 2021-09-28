@@ -6,7 +6,7 @@
     app:startDestination="@id/navigation_main">
     <fragment
         android:id="@+id/navigation_main"
-        android:name="com.example.ecommerceconcept.presentation.view.fragments.MainFragment"
+        android:name="com.example.ecommerceconcept.main.presentation.view.fragments.MainFragment"
         android:label="MainFragment"
         tools:layout="@layout/fragment_main" >
         <action
@@ -16,24 +16,24 @@
 
     <fragment
         android:id="@+id/navigation_basket"
-        android:name="com.example.ecommerceconcept.presentation.view.fragments.BasketFragment"
+        android:name="com.example.ecommerceconcept.cart.presentation.view.fragments.BasketFragment"
         android:label="BasketFragment"
         tools:layout="@layout/fragment_basket"/>
 
     <fragment
         android:id="@+id/navigation_favorite"
-        android:name="com.example.ecommerceconcept.presentation.view.fragments.FavoritesFragment"
+        android:name="com.example.ecommerceconcept.FavoritesFragment"
         android:label="FavoritesFragment"
         tools:layout="@layout/fragment_favorites"/>
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.example.ecommerceconcept.presentation.view.fragments.ProfileFragment"
+        android:name="com.example.ecommerceconcept.ProfileFragment"
         android:label="ProfileFragment"
         tools:layout="@layout/fragment_profile"/>
     <fragment
         android:id="@+id/navigation_product_details"
-        android:name="com.example.ecommerceconcept.presentation.view.fragments.ProductDetailsFragment"
+        android:name="com.example.ecommerceconcept.productDetails.presentation.view.fragments.ProductDetailsFragment"
         android:label="fragment_product_details"
         tools:layout="@layout/fragment_product_details" />
 

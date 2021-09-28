@@ -1,11 +1,10 @@
 package com.example.ecommerceconcept
 
 import android.app.Application
-import com.example.ecommerceconcept.presentation.di.module.appModule
-import com.example.ecommerceconcept.presentation.di.module.repoModule
-import com.example.ecommerceconcept.presentation.di.module.viewModelModule
+import com.example.ecommerceconcept.main.presentation.di.module.*
+import com.example.ecommerceconcept.productDetails.presentation.di.module.*
+import com.example.ecommerceconcept.cart.presentation.di.module.*
 import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 
 class App: Application() {
@@ -14,7 +13,11 @@ class App: Application() {
         super.onCreate()
         startKoin {
             androidContext(this@App)
-            modules(listOf(appModule, repoModule, viewModelModule))
+            modules(
+                listOf(
+                    mainModule, detailsModule, cartModule
+                )
+            )
         }
     }
 }

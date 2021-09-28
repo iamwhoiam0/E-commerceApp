@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".presentation.view.fragments.BasketFragment">
+    tools:context=".cart.presentation.view.fragments.BasketFragment">
 
     <ImageButton
         android:id="@+id/back_btn_basket"

@@ -57,7 +57,7 @@
             android:id="@+id/add_to_favorite"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:background="@color/white"
+            android:background="@android:color/transparent"
             android:src="@drawable/heart_selector"
             android:layout_marginTop="11dp"
             android:layout_marginEnd="12dp"
